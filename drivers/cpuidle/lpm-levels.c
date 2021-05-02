@@ -141,7 +141,7 @@ EXPORT_SYMBOL(msm_cpuidle_lpm_disable);
  */
 s32 msm_cpuidle_get_deep_idle_latency(void)
 {
-	return 10;
+	return 2;
 }
 EXPORT_SYMBOL(msm_cpuidle_get_deep_idle_latency);
 
