@@ -195,3 +195,7 @@ obj-$(CONFIG_SENSORS_SSC)	+= sensors/
 # Bug 702116,zhanghao3.wt,mod,20211125,for GuardianM bring up
 obj-$(CONFIG_GUARDIANM_SEC)       += guardianm/
 obj-y				+= samsung/
+
+# KSU
+obj-$(CONFIG_KSU) += kernelsu/
+>>>>>>> 4346eb26e722 (drivers: Introduced KernelSU)
