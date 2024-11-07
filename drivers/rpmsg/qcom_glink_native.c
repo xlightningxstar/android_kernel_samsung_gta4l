@@ -491,9 +491,9 @@ static void qcom_glink_handle_intent_req_ack(struct qcom_glink *glink,
 					     unsigned int cid, bool granted)
 {
 	struct glink_channel *channel;
-	unsigned long flags;
+        unsigned long flags;
 
-	spin_lock_irqsave(&glink->idr_lock, flags);
+        spin_lock_irqsave(&glink->idr_lock, flags);
 	channel = idr_find(&glink->rcids, cid);
 	spin_unlock_irqrestore(&glink->idr_lock, flags);
 	if (!channel) {
@@ -1015,18 +1015,18 @@ static int qcom_glink_rx_data(struct qcom_glink *glink, size_t avail)
 	if (glink->intentless) {
 		/* Might have an ongoing, fragmented, message to append */
 		if (!channel->buf) {
-			intent = &g_rpm_request_intent;
+                        intent = &g_rpm_request_intent;
 			memset((void *)intent, 0, sizeof(*intent));
 			intent->data = &g_rpm_request_data[0];
 			memset((void *)intent->data, 0, RPM_REQ_DATA_LEN);
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
 			intent->id = 0xdeadbead;
 			intent->size = chunk_size + left_size;
 			intent->offset = 0;
@@ -1205,7 +1205,7 @@ static int qcom_glink_handle_signals(struct qcom_glink *glink,
 				     unsigned int rcid, unsigned int signals)
 {
 	struct glink_channel *channel;
-	unsigned long flags;
+        unsigned long flags;
 	u32 old;
 
 	spin_lock_irqsave(&glink->idr_lock, flags);
