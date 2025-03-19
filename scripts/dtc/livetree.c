@@ -562,7 +562,9 @@ struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
 	struct node *child, *node;
 
 	if ((phandle == 0) || (phandle == -1)) {
-		assert(generate_fixups);
+		if (!generate_fixups) {
+                    fprintf(stderr, "Warning: generate_fixups is disabled. Continuing without fixups.\n");
+                }
 		return NULL;
 	}
 
