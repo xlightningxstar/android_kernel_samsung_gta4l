@@ -8,7 +8,6 @@ clear
 make clean
 rm -rf out
 rm -rf anykernel
-rm -rf modules
 TOOLCHAIN_PATH=$(pwd)/tc/bin
 MAKE_ARGS="ARCH=arm64 O=out CC=clang LLVM=1 LLVM_IAS=1 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_COMPAT=arm-linux-gnueabi- AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip"
 
@@ -54,7 +53,6 @@ echo "CCACHE_DIR: [$CCACHE_DIR]"
 # Anykernel3
 echo "Clone AnyKernel3 for packing kernel"
 git clone https://github.com/CuriousNom/AnyKernel3.git -b gta4l-nbr --single-branch --depth=1 anykernel
-git clone https://github.com/CuriousNom/AnyKernel3.git -b gta4l-kvm --single-branch --depth=1 modules
 
 # Build for gta4l series
 echo "Building kernel for Samsung Galaxy Tab A7......"
@@ -76,19 +74,6 @@ cp out/arch/arm64/boot/dtb anykernel/
 
 cd anykernel
 ZIP_FILENAME=Kernel_gta4l_$(date +'%Y%m%d_%H%M%S')_ak3_${GIT_COMMIT_ID}.zip
-zip -r9 $ZIP_FILENAME ./* -x .git out/ ./*.zip
-mv $ZIP_FILENAME ../
-cd ..
-
-echo "Generating kernel modules......"
-find out -type f -name "*.ko" -exec cp -t modules/system/vendor/lib/modules/ {} +
-rm modules/system/vendor/lib/modules/wlan.ko
-find out -type f -name "modules.alias" -exec cat {} + > modules/system/vendor/lib/modules/modules.alias
-find out -type f -name "modules.dep" -exec cat {} + > modules/system/vendor/lib/modules/modules.dep
-find out -type f -name "modules.softdep" -exec cat {} + > modules/system/vendor/lib/modules/modules.softdep
-
-cd modules
-ZIP_FILENAME=Kernel_Modules_gta4l_$(date +'%Y%m%d_%H%M%S')_ak3_${GIT_COMMIT_ID}.zip
 zip -r9 $ZIP_FILENAME ./* -x .git out/ ./*.zip
 mv $ZIP_FILENAME ../
 cd ..
