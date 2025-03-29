@@ -1026,7 +1026,6 @@
 			qcom,bark-time = <0x3a98>;
 			qcom,pet-time = <0x2490>;
 			qcom,ipi-ping;
-			qcom,wakeup-enable;
 			phandle = <0x1e5>;
 		};
 
